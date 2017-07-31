@@ -27,8 +27,8 @@ public class AnimalTypeController {
 	private AnimalTypeService animalTypeService;
 	
 	@RequestMapping(value = "/animalTypes")
-    public ModelAndView listAnimalTypes(ModelAndView model) throws IOException {
-        List<AnimalType> animalTypes=animalTypeService.getAnimalTypes();
+    public ModelAndView listAnimalTypes(ModelAndView model,HttpServletRequest request) throws IOException {
+        List<AnimalType> animalTypes=animalTypeService.getAnimalTypes(((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm());
         model.addObject("animalTypes",animalTypes);
         model.setViewName("animal_types");
         return model;

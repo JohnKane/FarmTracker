@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.farmtracker.dao.AnimalTypeDAO;
 import com.farmtracker.model.AnimalType;
+import com.farmtracker.model.Farm;
 
 @Service
 @Transactional
@@ -37,8 +38,8 @@ public class AnimalTypeService {
 	}
 	
 	@Transactional
-	public List<AnimalType> getAnimalTypes(){
-		return animalTypeDAO.getAnimalTypes();
+	public List<AnimalType> getAnimalTypes(Farm farm){
+		return animalTypeDAO.getAnimalTypes(farm);
 	}
 	
 	public void setAnimalTypeDAO(AnimalTypeDAO animalTypeDAO) {

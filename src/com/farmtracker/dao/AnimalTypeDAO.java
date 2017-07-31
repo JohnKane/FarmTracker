@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.farmtracker.model.AnimalType;
+import com.farmtracker.model.Farm;
 
 @Repository
 public class AnimalTypeDAO {
@@ -31,7 +32,9 @@ public class AnimalTypeDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<AnimalType> getAnimalTypes(){
-		return sessionFactory.getCurrentSession().createQuery("from AnimalType").list();
+	public List<AnimalType> getAnimalTypes(Farm farm){
+		return sessionFactory.getCurrentSession().createQuery("from AnimalType at where at.farm.farmKey=:key")
+			.setParameter("key",farm.getKey())
+				.list();
 	}
 }
