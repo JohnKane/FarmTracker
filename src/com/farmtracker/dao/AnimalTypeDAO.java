@@ -14,6 +14,10 @@ public class AnimalTypeDAO {
 	@Autowired
     private SessionFactory sessionFactory;
 	
+	public void createAnimalType(AnimalType type) {
+		sessionFactory.getCurrentSession().saveOrUpdate(type);
+	}
+	
 	public void updateAnimalType(AnimalType type) {
 		sessionFactory.getCurrentSession().update(type);
 	}
