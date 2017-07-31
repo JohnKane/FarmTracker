@@ -17,7 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -50,14 +49,12 @@ public class Animal {
 	@Column
 	private String notes;
 	
-	@SuppressWarnings("deprecation")
 	@ManyToMany
 	@JoinTable(
 		name="child",
 	    joinColumns=@JoinColumn(name="parent_key", referencedColumnName="animal_key"),
 	    inverseJoinColumns=@JoinColumn(name="child_key", referencedColumnName="animal_key")
     )
-	@Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
 	private List<Animal> children;
 	
 	@Transient
