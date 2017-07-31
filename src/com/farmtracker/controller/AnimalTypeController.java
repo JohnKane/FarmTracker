@@ -28,7 +28,7 @@ public class AnimalTypeController {
     public ModelAndView listAnimalTypes(ModelAndView model) throws IOException {
         List<AnimalType> animalTypes=animalTypeService.getAnimalTypes();
         model.addObject("animalTypes",animalTypes);
-        model.setViewName("animalTypes");
+        model.setViewName("animal_types");
         return model;
     }
 	
