@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.farmtracker.model.AnimalType;
+import com.farmtracker.model.User;
 import com.farmtracker.service.AnimalTypeService;
 
 @Controller
@@ -41,11 +42,13 @@ public class AnimalTypeController {
     }
 	
 	@RequestMapping(value = "/saveAnimalType", method = RequestMethod.POST)
-    public ModelAndView saveAnimalType(@ModelAttribute AnimalType type) {
-        if(type.getKey() == null) 
-            animalTypeService.addAnimalType(type);
-         
-        else animalTypeService.updateAnimalType(type);
+    public ModelAndView saveAnimalType(@ModelAttribute AnimalType type,HttpServletRequest request) {
+		type.setFarm(((User)request.getSession().getAttribute("LOGGEDIN_USER")).getFarm());
+	        if(type.getKey() == null) {
+	            animalTypeService.addAnimalType(type);
+	        }
+	         
+	        else animalTypeService.updateAnimalType(type);
 
         return new ModelAndView("redirect:/animalTypes");
     }

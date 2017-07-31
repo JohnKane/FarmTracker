@@ -21,7 +21,7 @@
             <c:forEach var="type" items="${animalTypes}">
                 <tr>
                 	<td>
-                    	<a href="editAnimalType?key=$type.key}">Edit</a>
+                    	<a href="editAnimalType?key=${type.key}">Edit</a>
                     	<a href="deleteAnimalType?key=${type.key}">Delete</a>
                    	</td>
                     <td>${type.name}</td>
