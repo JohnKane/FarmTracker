@@ -50,6 +50,7 @@ public class Animal {
 	@Column
 	private String notes;
 	
+	@SuppressWarnings("deprecation")
 	@ManyToMany
 	@JoinTable(
 		name="child",
