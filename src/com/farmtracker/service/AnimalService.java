@@ -42,6 +42,11 @@ public class AnimalService {
 		return animalDAO.getAnimals(farm);
 	}
 	
+	@Transactional
+	public List<Animal> getAnimals(List<Integer> keys){
+		return animalDAO.getAnimals(keys);
+	}
+	
 	public void setAnimalDAO(AnimalDAO animalDAO) {
         this.animalDAO=animalDAO;
     }

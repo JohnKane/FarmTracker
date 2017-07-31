@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="users")
 public class User {
@@ -27,6 +29,7 @@ public class User {
     private String password;
 	
 	@Column(name="date_created")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateCreated;
 	
 	@ManyToOne(optional=false,cascade={CascadeType.PERSIST,CascadeType.MERGE}) 

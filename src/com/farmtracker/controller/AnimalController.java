@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.farmtracker.model.Animal;
+import com.farmtracker.model.AnimalType;
+import com.farmtracker.model.Farm;
 import com.farmtracker.model.User;
 import com.farmtracker.service.AnimalService;
+import com.farmtracker.service.AnimalTypeService;
 import com.farmtracker.util.Util;
 
 @Controller
@@ -26,6 +29,9 @@ private static final Logger LOG = Logger.getLogger(AnimalController.class.getNam
 	@Autowired
 	private AnimalService animalService;
 	
+	@Autowired
+	private AnimalTypeService animalTypeService;
+	
 	@RequestMapping(value = "/animals")
     public ModelAndView listAnimals(ModelAndView model,HttpServletRequest request) throws IOException {
         List<Animal> animals=animalService.getAnimals(((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm());
@@ -35,19 +41,24 @@ private static final Logger LOG = Logger.getLogger(AnimalController.class.getNam
     }
 	
 	@RequestMapping(value = "/newAnimal", method = RequestMethod.GET)
-    public ModelAndView newAnimalType(ModelAndView model) {
+    public ModelAndView newAnimalType(ModelAndView model,HttpServletRequest request) {
         Animal animal=new Animal();
         model.addObject("animal",animal);
+        model.addObject("animalTypes",getAnimalTypes(((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm()));
+        model.addObject("animals",getAnimals(((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm()));
         model.setViewName("animal_form");
         return model;
     }
 	
 	@RequestMapping(value = "/saveAnimal", method = RequestMethod.POST)
     public ModelAndView saveAnimal(@ModelAttribute Animal animal,HttpServletRequest request) {
+			if(!animal.getChildKeys().isEmpty()) {
+				List<Animal> children=animalService.getAnimals(animal.getChildKeys());
+				animal.setChildren(children);
+			}
 	        if(animal.getKey() == null) {
 	            animalService.addAnimal(animal);
 	        }
-	         
 	        else animalService.updateAnimal(animal);
 
         return new ModelAndView("redirect:/animals");
@@ -66,8 +77,16 @@ private static final Logger LOG = Logger.getLogger(AnimalController.class.getNam
         Animal animal=animalService.getAnimal(key);
         ModelAndView model = new ModelAndView("animal_form");
         model.addObject("animal",animal);
- 
+        model.addObject("animalTypes",getAnimalTypes(((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm()));
+        model.addObject("animals",getAnimals(((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm()));
         return model;
     }
 	
+	private List<AnimalType> getAnimalTypes(Farm farm){
+		return animalTypeService.getAnimalTypes(farm);
+	}
+	
+	private List<Animal> getAnimals(Farm farm){
+		return animalService.getAnimals(farm);
+	}
 }
