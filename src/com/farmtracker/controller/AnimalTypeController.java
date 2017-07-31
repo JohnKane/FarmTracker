@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.farmtracker.model.AnimalType;
-import com.farmtracker.model.Farm;
 import com.farmtracker.service.AnimalTypeService;
 
 @Controller
@@ -33,11 +32,11 @@ public class AnimalTypeController {
         return model;
     }
 	
-	@RequestMapping(value = "/newFarm", method = RequestMethod.GET)
-    public ModelAndView newFarm(ModelAndView model) {
-        Farm farm=new Farm();
-        model.addObject("farm",farm);
-        model.setViewName("farm_form");
+	@RequestMapping(value = "/newAnimalType", method = RequestMethod.GET)
+    public ModelAndView newAnimalType(ModelAndView model) {
+        AnimalType type=new AnimalType();
+        model.addObject("animalType",type);
+        model.setViewName("animal_type_form");
         return model;
     }
 	
@@ -51,19 +50,19 @@ public class AnimalTypeController {
         return new ModelAndView("redirect:/animalTypes");
     }
 	
-	@RequestMapping(value = "/deleteFarm", method = RequestMethod.GET)
-    public ModelAndView deleteFarm(HttpServletRequest request) {
+	@RequestMapping(value = "/deleteAnimalType", method = RequestMethod.GET)
+    public ModelAndView deleteAnimalType(HttpServletRequest request) {
         int key=Integer.parseInt(request.getParameter("key"));
-        farmService.deleteFarm(farmService.getFarm(key));	
-        return new ModelAndView("redirect:/farms");
+        animalTypeService.deleteAnimalType(animalTypeService.getAnimalType(key));	
+        return new ModelAndView("redirect:/animalTypes");
     }
 	
-	@RequestMapping(value = "/editFarm", method = RequestMethod.GET)
-    public ModelAndView editFarm(HttpServletRequest request) {
+	@RequestMapping(value = "/editAnimalType", method = RequestMethod.GET)
+    public ModelAndView editAnimalType(HttpServletRequest request) {
         int key = Integer.parseInt(request.getParameter("key"));
-        Farm farm=farmService.getFarm(key);
-        ModelAndView model = new ModelAndView("farm_form");
-        model.addObject("farm", farm);
+        AnimalType type=animalTypeService.getAnimalType(key);
+        ModelAndView model = new ModelAndView("animal_type_form");
+        model.addObject("animalType", type);
  
         return model;
     }
