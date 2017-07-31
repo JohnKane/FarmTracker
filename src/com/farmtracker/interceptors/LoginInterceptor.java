@@ -7,6 +7,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.farmtracker.model.User;
+import com.farmtracker.util.Util;
 
 public class LoginInterceptor implements HandlerInterceptor{
 	
@@ -14,7 +15,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request,HttpServletResponse response, Object handler) throws Exception {
 		// Avoid a redirect loop for some urls
 		if( !request.getRequestURI().contains("login")){
-			User userData = (User) request.getSession().getAttribute("LOGGEDIN_USER");
+			User userData = (User) request.getSession().getAttribute(Util.LOGGED_IN_USER);
 				if(userData == null){
 				    response.sendRedirect("login");
 				    return false;

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.farmtracker.model.AnimalType;
 import com.farmtracker.model.User;
 import com.farmtracker.service.AnimalTypeService;
+import com.farmtracker.util.Util;
 
 @Controller
 public class AnimalTypeController {
@@ -43,7 +44,7 @@ public class AnimalTypeController {
 	
 	@RequestMapping(value = "/saveAnimalType", method = RequestMethod.POST)
     public ModelAndView saveAnimalType(@ModelAttribute AnimalType type,HttpServletRequest request) {
-		type.setFarm(((User)request.getSession().getAttribute("LOGGEDIN_USER")).getFarm());
+		type.setFarm(((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm());
 	        if(type.getKey() == null) {
 	            animalTypeService.addAnimalType(type);
 	        }
