@@ -22,7 +22,7 @@ public class AnimalTypeService {
     }
 	
 	@Transactional
-	public void updateFarm(AnimalType type) {
+	public void updateAnimalType(AnimalType type) {
 		animalTypeDAO.updateAnimalType(type);
 	}
 	
