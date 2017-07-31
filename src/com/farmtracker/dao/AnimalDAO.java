@@ -40,8 +40,8 @@ public class AnimalDAO {
 	
 	@SuppressWarnings("unchecked")
 	public List<Animal> getAnimals(List<Integer> keys){
-		return sessionFactory.getCurrentSession().createQuery("from Animal a where a.key in :keys")
-			.setParameter("keys",keys)
+		return sessionFactory.getCurrentSession().createQuery("from Animal a where a.animalKey in (:keys)")
+			.setParameterList("keys",keys)
 				.list();
 	}
 }

@@ -1,6 +1,7 @@
 package com.farmtracker.controller;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -45,17 +46,18 @@ private static final Logger LOG = Logger.getLogger(AnimalController.class.getNam
         Animal animal=new Animal();
         model.addObject("animal",animal);
         model.addObject("animalTypes",getAnimalTypes(((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm()));
-        model.addObject("animals",getAnimals(((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm()));
+        model.addObject("animals",getAnimals(((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm(),null));
         model.setViewName("animal_form");
         return model;
     }
 	
 	@RequestMapping(value = "/saveAnimal", method = RequestMethod.POST)
     public ModelAndView saveAnimal(@ModelAttribute Animal animal,HttpServletRequest request) {
-			if(!animal.getChildKeys().isEmpty()) {
-				List<Animal> children=animalService.getAnimals(animal.getChildKeys());
+			if(!animal.getPopulatedChildKeys().isEmpty()) {
+				List<Animal> children=animalService.getAnimals(animal.getPopulatedChildKeys());
 				animal.setChildren(children);
 			}
+			
 	        if(animal.getKey() == null) {
 	            animalService.addAnimal(animal);
 	        }
@@ -78,7 +80,7 @@ private static final Logger LOG = Logger.getLogger(AnimalController.class.getNam
         ModelAndView model = new ModelAndView("animal_form");
         model.addObject("animal",animal);
         model.addObject("animalTypes",getAnimalTypes(((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm()));
-        model.addObject("animals",getAnimals(((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm()));
+        model.addObject("animals",getAnimals(((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm(),animal));
         return model;
     }
 	
@@ -86,7 +88,16 @@ private static final Logger LOG = Logger.getLogger(AnimalController.class.getNam
 		return animalTypeService.getAnimalTypes(farm);
 	}
 	
-	private List<Animal> getAnimals(Farm farm){
-		return animalService.getAnimals(farm);
+	private List<Animal> getAnimals(Farm farm,Animal exclude){
+		List<Animal> children=animalService.getAnimals(farm);
+			if(exclude!=null && children!=null) {
+				Iterator<Animal> i=children.iterator();
+					while(i.hasNext()) {
+						Animal tmp=i.next();
+							if(tmp.getKey().equals(exclude.getKey()))
+								i.remove();
+					}
+			}
+		return children;
 	}
 }
