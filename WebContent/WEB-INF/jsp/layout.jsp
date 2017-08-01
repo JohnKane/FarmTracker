@@ -17,10 +17,10 @@
 	        <div id="header">
 	        	<tiles:insertAttribute name="header" />
 	        </div>  
-	        <div class="wrap">  
+	        <div id="main" class="wrap">  
 	        	<tiles:insertAttribute name="body" />
 	        </div>
-	        <div>
+	        <div id="footer" class="wrap">
 	        	<tiles:insertAttribute name="footer" />
 	        </div>  
 	  </div>
