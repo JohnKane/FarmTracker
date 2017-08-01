@@ -1,3 +1,3 @@
 <div id=header_text class="wrap">
-	<a href="users">Farm Tracker</a>
+	<a href="users">FarmTracker</a>
 </div>
