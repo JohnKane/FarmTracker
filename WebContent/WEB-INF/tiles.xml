@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE tiles-definitions PUBLIC  
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>  
+    <definition name="base.definition"  
+        template="/WEB-INF/jsp/layout.jsp">  
+        <put-attribute name="header" value="/WEB-INF/jsp/header.jsp" /> 
+        <put-attribute name="body" value="" />  
+        <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />  
+    </definition>  
+    
+    <definition name="animal_form" extends="base.definition">   
+        <put-attribute name="body" value="/WEB-INF/jsp/animal_form.jsp" />  
+    </definition>  
+    <definition name="animal_type_form" extends="base.definition">   
+        <put-attribute name="body" value="/WEB-INF/jsp/animal_type_form.jsp" />  
+    </definition>  
+    <definition name="animal_types" extends="base.definition">   
+        <put-attribute name="body" value="/WEB-INF/jsp/animal_types.jsp" />  
+    </definition>  
+    <definition name="animals" extends="base.definition">   
+        <put-attribute name="body" value="/WEB-INF/jsp/animals.jsp" />  
+    </definition>  
+    <definition name="farm_form" extends="base.definition">   
+        <put-attribute name="body" value="/WEB-INF/jsp/farm_form.jsp" />  
+    </definition>
+    <definition name="farms" extends="base.definition">   
+        <put-attribute name="body" value="/WEB-INF/jsp/farms.jsp" />  
+    </definition>    
+    <definition name="login_form" extends="base.definition">   
+        <put-attribute name="body" value="/WEB-INF/jsp/login_form.jsp" />  
+    </definition>    
+  	<definition name="user_form" extends="base.definition">   
+        <put-attribute name="body" value="/WEB-INF/jsp/user_form.jsp" />  
+    </definition>
+    <definition name="users" extends="base.definition">   
+        <put-attribute name="body" value="/WEB-INF/jsp/users.jsp" />  
+    </definition>
+    
+</tiles-definitions>  
