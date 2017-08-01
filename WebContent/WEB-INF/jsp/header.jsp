@@ -1,2 +1,3 @@
-<h2>Header</h2>  
-<hr/>  
+<div id=header_text class="wrap">
+	<a href="users">Farm Tracker</a>
+</div>

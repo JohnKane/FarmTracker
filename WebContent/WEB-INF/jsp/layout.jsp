@@ -17,10 +17,10 @@
 	        <div id="header">
 	        	<tiles:insertAttribute name="header" />
 	        </div>  
-	        <div>  
-	        <tiles:insertAttribute name="body" /></div>  
-	        
-	        <div style="clear:both">
+	        <div class="wrap">  
+	        	<tiles:insertAttribute name="body" />
+	        </div>
+	        <div>
 	        	<tiles:insertAttribute name="footer" />
 	        </div>  
 	  </div>
