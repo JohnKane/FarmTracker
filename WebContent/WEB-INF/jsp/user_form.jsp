@@ -11,7 +11,7 @@
 	            <form:hidden path="key"/>
 	            <div class="form-group">
                 	<form:label path="farm.key">Farm</form:label>
-                	<form:select path="farm.key" value="" class="form-control" required="required">
+                	<form:select path="farm.key" class="form-control" required="required">
 	                	<form:option value="">Select Farm</form:option>
 	    				<form:options items="${farms}" itemValue="key" itemLabel="name"/>
                 	</form:select>
