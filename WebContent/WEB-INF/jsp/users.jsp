@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
  
 <div class="container">
 	<div class="panel panel-default">
@@ -23,7 +24,7 @@
 		               	<td>${user.role.name}</td>
 		               	<td>${user.farm.name}</td>
 		                <td>${user.email}</td>
-		                <td>${user.dateCreated}</td>
+		                <td><fmt:formatDate type="date" pattern="MM/dd/yyyy" value="${user.dateCreated}" /></td>
 		            </tr>
 		        </c:forEach>
 		    </table>

@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
- 
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -24,8 +25,8 @@
 	                   	<td>${animal.animalType.name}</td>
 	                    <td>${animal.name}</td>
 	                    <td>${animal.id}</td>
-	                    <td>${animal.birthdate}</td>
-	                    <td>${animal.deathdate}</td>
+	                    <td><fmt:formatDate type="date" pattern="MM/dd/yyyy" value="${animal.birthdate}" /></td>
+	                    <td><fmt:formatDate type="date" pattern="MM/dd/yyyy" value="${animal.deathdate}" /></td>
 	                </tr>
 	            </c:forEach>
 	        </table>
