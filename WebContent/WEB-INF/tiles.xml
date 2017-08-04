@@ -28,6 +28,12 @@
     <definition name="animals" extends="base.definition">   
         <put-attribute name="body" value="/WEB-INF/jsp/animals.jsp" />  
     </definition>  
+    <definition name="event_form" extends="base.definition">   
+        <put-attribute name="body" value="/WEB-INF/jsp/event_form.jsp" />  
+    </definition>  
+    <definition name="events" extends="base.definition">   
+        <put-attribute name="body" value="/WEB-INF/jsp/events.jsp" />  
+    </definition>  
     <definition name="farm_form" extends="base.definition">   
         <put-attribute name="body" value="/WEB-INF/jsp/farm_form.jsp" />  
     </definition>

@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="event")
 public class Event {
@@ -30,6 +32,7 @@ public class Event {
 	private Animal animal;
 	
 	@Column(name="event_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date eventDate;
 	
 	@Column
@@ -43,7 +46,7 @@ public class Event {
 	
 	public void setKey(Integer key) {this.eventKey=key;}
 	public void setAction(Action action) {this.action=action;}
-	public void setAnimmal(Animal animal) {this.animal=animal;}
+	public void setAnimal(Animal animal) {this.animal=animal;}
 	public void setEventDate(Date eventDate) {this.eventDate=eventDate;}
 	public void setNotes(String notes) {this.notes=notes;}
 }
