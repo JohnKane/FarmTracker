@@ -16,8 +16,13 @@ body{
 	background-color: #337ab7;
 }
 
+#header_text{
+	padding: 12px;
+	font-family: Arial, Times, serif;
+}
+
 #header_text a{
-	font-size: 42px;
+	font-size: 30px;
 	color: #fff;
 	text-decoration: none !important;
 }

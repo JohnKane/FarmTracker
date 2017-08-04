@@ -41,7 +41,7 @@ public class LoginController {
         		return model;
         	}
         request.getSession().setAttribute("LOGGEDIN_USER",loggedInUser);
-        return new ModelAndView("redirect:/users");
+        return new ModelAndView("redirect:/events");
     }
 	
 	@RequestMapping(value = "/logout")
