@@ -25,7 +25,7 @@ import com.farmtracker.util.Util;
 @Controller
 public class AnimalController {
 
-private static final Logger LOG = Logger.getLogger(AnimalController.class.getName());
+	private static final Logger LOG = Logger.getLogger(AnimalController.class.getName());
 	
 	@Autowired
 	private AnimalService animalService;

@@ -16,7 +16,7 @@ public class Action {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="acion_key")
+	@Column(name="action_key")
     private Integer actionKey;
 	
 	@ManyToOne(optional=false,cascade={CascadeType.PERSIST,CascadeType.MERGE}) 

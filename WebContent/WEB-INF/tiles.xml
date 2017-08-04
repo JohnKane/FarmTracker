@@ -10,6 +10,12 @@
         <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />  
     </definition>  
     
+    <definition name="action_form" extends="base.definition">   
+        <put-attribute name="body" value="/WEB-INF/jsp/action_form.jsp" />  
+    </definition>  
+    <definition name="actions" extends="base.definition">   
+        <put-attribute name="body" value="/WEB-INF/jsp/actions.jsp" />  
+    </definition>  
     <definition name="animal_form" extends="base.definition">   
         <put-attribute name="body" value="/WEB-INF/jsp/animal_form.jsp" />  
     </definition>  
