@@ -18,7 +18,7 @@
 	        	<tiles:insertAttribute name="header" />
 	        </div>  
 	        <div id="navigation" class="wrap">
-		        <nav class="navbar navbar-default">
+		        <nav class="navbar navbar-default" data-spy="affix" data-offset-top="60">
 				  <div class="container-fluid">
 				  	  <c:set var="uri" value="${requestScope['javax.servlet.forward.request_uri']}" />
 					  <ul class="nav navbar-nav">

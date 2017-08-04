@@ -46,3 +46,8 @@ body{
 	margin: auto;
 	width: 90%;
 }
+
+.affix {
+	top: 0;
+    width: 90%;
+}
