@@ -17,6 +17,35 @@
 	        <div id="header">
 	        	<tiles:insertAttribute name="header" />
 	        </div>  
+	        <div id="navigation" class="wrap">
+		        <nav class="navbar navbar-default">
+				  <div class="container-fluid">
+				  	  <c:set var="uri" value="${requestScope['javax.servlet.forward.request_uri']}" />
+					  <ul class="nav navbar-nav">
+						<li <c:if test="${uri.contains('events') || uri.contains('newEvent') || uri.contains('editEvent')}">class="active"</c:if>>
+							<a href="events">Events</a>
+						</li>
+						<li <c:if test="${uri.contains('animals') || uri.contains('newAnimal') && !uri.contains('Type') || uri.contains('editAnimal') && !uri.contains('Type')}">class="active"</c:if>>
+							<a href="animals">Animals</a>
+						</li>
+						<li <c:if test="${uri.contains('actions') || uri.contains('newAction') || uri.contains('editAction')}">class="active"</c:if>>
+							<a href="actions">Actions</a>
+						</li>
+						<li <c:if test="${uri.contains('animalTypes') || uri.contains('newAnimalType') || uri.contains('editAnimalType')}">class="active"</c:if>>
+							<a href="animalTypes">Animal Types</a>
+						</li>
+						<c:if test="${sessionScope.LOGGEDIN_USER.role.name=='Admin'}">
+							<li <c:if test="${uri.contains('users') || uri.contains('newUser') || uri.contains('editUser')}">class="active"</c:if>>
+								<a href="users">Users</a>
+							</li>
+							<li <c:if test="${uri.contains('farms') || uri.contains('newFarm') || uri.contains('editFarm')}">class="active"</c:if>>
+								<a href="farms">Farms</a>
+							</li>
+						</c:if>
+					  </ul>
+					</div>
+				</nav>
+	        </div>
 	        <div id="main" class="wrap">  
 	        	<tiles:insertAttribute name="body" />
 	        </div>

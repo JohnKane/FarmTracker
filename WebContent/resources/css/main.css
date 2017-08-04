@@ -22,6 +22,11 @@ body{
 	text-decoration: none !important;
 }
 
+.navbar{
+    margin-bottom: 0px;
+    border-radius: 0px;
+}
+
 #main{
 	padding-top: 22px;
 	background-color: #fff;
