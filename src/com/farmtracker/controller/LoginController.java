@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.farmtracker.model.User;
 import com.farmtracker.service.UserService;
+import com.farmtracker.util.Util;
 
 @Controller
 public class LoginController {
@@ -41,5 +42,12 @@ public class LoginController {
         	}
         request.getSession().setAttribute("LOGGEDIN_USER",loggedInUser);
         return new ModelAndView("redirect:/users");
+    }
+	
+	@RequestMapping(value = "/logout")
+    public ModelAndView getLogout(ModelAndView model,HttpServletRequest request) throws IOException {
+		request.getSession().removeAttribute(Util.LOGGED_IN_USER);
+		model.setViewName("redirect:/login");
+        return model;
     }
 }

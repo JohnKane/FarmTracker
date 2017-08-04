@@ -41,7 +41,10 @@
 							<li <c:if test="${uri.contains('farms') || uri.contains('newFarm') || uri.contains('editFarm')}">class="active"</c:if>>
 								<a href="farms">Farms</a>
 							</li>
-						</c:if>
+						</c:if>	
+					  </ul>
+					  <ul class="nav navbar-nav navbar-right">
+							<li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 					  </ul>
 					</div>
 				</nav>
