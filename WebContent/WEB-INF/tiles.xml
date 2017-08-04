@@ -9,6 +9,12 @@
         <put-attribute name="body" value="" />  
         <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />  
     </definition>  
+    <definition name="base.definition_not_logged_in"  
+        template="/WEB-INF/jsp/layout_not_logged_in.jsp">  
+        <put-attribute name="header" value="/WEB-INF/jsp/header.jsp" /> 
+        <put-attribute name="body" value="" />  
+        <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />  
+    </definition>  
     
     <definition name="action_form" extends="base.definition">   
         <put-attribute name="body" value="/WEB-INF/jsp/action_form.jsp" />  
@@ -40,7 +46,7 @@
     <definition name="farms" extends="base.definition">   
         <put-attribute name="body" value="/WEB-INF/jsp/farms.jsp" />  
     </definition>    
-    <definition name="login_form" extends="base.definition">   
+    <definition name="login_form" extends="base.definition_not_logged_in">   
         <put-attribute name="body" value="/WEB-INF/jsp/login_form.jsp" />  
     </definition>    
   	<definition name="user_form" extends="base.definition">   
