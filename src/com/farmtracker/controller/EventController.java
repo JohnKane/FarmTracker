@@ -41,17 +41,13 @@ public class EventController {
 	@RequestMapping(value = "/events")
     public ModelAndView listEvents(ModelAndView model,HttpServletRequest request){
 		Farm farm=((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm();
-		Integer searchBy=(Integer)request.getSession().getAttribute(Util.EVENT_SEARCH_BY);
-		String searchValue=(String)request.getSession().getAttribute(Util.EVENT_SEARCH_VALUE);
+		EventSearch search=(EventSearch)request.getSession().getAttribute(Util.EVENT_SEARCH);
 		
-        List<Event> events=(searchBy==null || searchValue==null) ? 
+        List<Event> events=(search==null || search.getSearchType()==null || search.getSearchType()==null) ? 
         		eventService.getEvents(farm) : 
-        		eventService.getEvents(farm,searchBy,"%"+searchValue+"%");
-        EventSearch search=new EventSearch();
-        search.setSearchType(searchBy);
-        search.setSearchValue(searchValue);
+        		eventService.getEvents(farm,search.getSearchType(),"%"+search.getSearchValue()+"%");
         model.addObject("events",events);
-        model.addObject("eventSearch",search);
+        model.addObject("eventSearch",search!=null ? search : new EventSearch());
         model.setViewName("events");
         return model;
     }
@@ -59,12 +55,10 @@ public class EventController {
 	@RequestMapping(value = "/searchEvents", method = RequestMethod.POST)
     public ModelAndView eventSearch(@ModelAttribute EventSearch eventSearch,HttpServletRequest request,@RequestParam String action) {
         if(action.equals("reset")) {
-        	request.getSession().removeAttribute(Util.EVENT_SEARCH_BY);
-            request.getSession().removeAttribute(Util.EVENT_SEARCH_VALUE);
+        	request.getSession().removeAttribute(Util.EVENT_SEARCH);
         }
         else {
-        	request.getSession().setAttribute(Util.EVENT_SEARCH_BY,(Integer)eventSearch.getSearchType());
-        	request.getSession().setAttribute(Util.EVENT_SEARCH_VALUE,eventSearch.getSearchValue());
+        	request.getSession().setAttribute(Util.EVENT_SEARCH,eventSearch);
         }
         return new ModelAndView("redirect:/events");
     }
