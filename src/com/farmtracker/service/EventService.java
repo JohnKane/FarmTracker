@@ -42,6 +42,11 @@ public class EventService {
 		return eventDAO.getEvents(farm);
 	}
 	
+	@Transactional
+	public List<Event> getEvents(Farm farm, Integer searchBy, String searchValue){
+		return eventDAO.getEvents(farm, searchBy, searchValue);
+	}
+	
 	public void setEventDAO(EventDAO eventDAO) {
         this.eventDAO=eventDAO;
     }
