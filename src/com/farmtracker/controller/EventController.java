@@ -48,8 +48,8 @@ public class EventController {
         		eventService.getEvents(farm) : 
         		eventService.getEvents(farm,searchBy,"%"+searchValue+"%");
         EventSearch search=new EventSearch();
-        search.setSearchType((Integer)request.getSession().getAttribute(Util.EVENT_SEARCH_BY));
-        search.setSearchValue((String)request.getSession().getAttribute(Util.EVENT_SEARCH_VALUE));
+        search.setSearchType(searchBy);
+        search.setSearchValue(searchValue);
         model.addObject("events",events);
         model.addObject("eventSearch",search);
         model.setViewName("events");
