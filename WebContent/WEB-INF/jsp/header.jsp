@@ -1,3 +1,3 @@
 <div id=header_text class="wrap">
-	<a href="events">FarmersLittleHelper.com</a>
+	<a href="events">FarmersLittleHelper</a>
 </div>

@@ -33,7 +33,7 @@ public class Event {
 	
 	@Column(name="event_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date eventDate;
+	private Date eventDate=new Date();
 	
 	@Column
 	private String notes;

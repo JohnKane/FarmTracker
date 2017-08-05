@@ -22,8 +22,8 @@
 				  <div class="container-fluid">
 				  	  <c:set var="uri" value="${requestScope['javax.servlet.forward.request_uri']}" />
 					  <ul class="nav navbar-nav">
-						<li <c:if test="${uri.contains('login')}">class="active"</c:if>>
-							<a href="login">Login</a>
+						<li <c:if test="${uri.contains('home')}">class="active"</c:if>>
+							<a href="home">Home</a>
 						</li>
 					  </ul>
 					  <ul class="nav navbar-nav navbar-right">

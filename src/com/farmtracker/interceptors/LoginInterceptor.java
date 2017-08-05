@@ -14,7 +14,8 @@ public class LoginInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request,HttpServletResponse response, Object handler) throws Exception {
 		// Avoid a redirect loop for some urls
-		if( !request.getRequestURI().contains("login")){
+		if( !request.getRequestURI().contains("login") && 
+			!request.getRequestURI().contains("home")){
 			User userData = (User) request.getSession().getAttribute(Util.LOGGED_IN_USER);
 				if(userData == null){
 				    response.sendRedirect("login");

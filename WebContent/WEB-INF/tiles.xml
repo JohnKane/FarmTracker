@@ -46,6 +46,9 @@
     <definition name="farms" extends="base.definition">   
         <put-attribute name="body" value="/WEB-INF/jsp/farms.jsp" />  
     </definition>    
+    <definition name="home" extends="base.definition_not_logged_in">   
+        <put-attribute name="body" value="/WEB-INF/jsp/home.jsp" />  
+    </definition> 
     <definition name="login_form" extends="base.definition_not_logged_in">   
         <put-attribute name="body" value="/WEB-INF/jsp/login_form.jsp" />  
     </definition>    
