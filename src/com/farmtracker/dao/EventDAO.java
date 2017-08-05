@@ -43,28 +43,28 @@ public class EventDAO {
 	public List<Event> getEvents(Farm farm, Integer searchBy, String searchValue){
 		if(searchBy!=null && searchValue!=null) {
 			if(searchBy.equals(SearchType.ACTION.getKey())) {
-				return sessionFactory.getCurrentSession().createQuery("from Event e where e.action.farm.farmKey=:key and upper(e.action.name) like :action")
+				return sessionFactory.getCurrentSession().createQuery("from Event e where e.action.farm.farmKey=:key and upper(e.action.name) like :action order by e.eventDate desc")
 						.setParameter("key",farm.getKey())
 						.setParameter("action",searchValue.toUpperCase())
 							.list();
 			}
 			else if(searchBy.equals(SearchType.NAME.getKey())) {
-				return sessionFactory.getCurrentSession().createQuery("from Event e where e.action.farm.farmKey=:key and upper(e.animal.name) like :name")
+				return sessionFactory.getCurrentSession().createQuery("from Event e where e.action.farm.farmKey=:key and upper(e.animal.name) like :name order by e.eventDate desc")
 						.setParameter("key",farm.getKey())
 						.setParameter("name",searchValue.toUpperCase())
 							.list();
 			}
 			else if(searchBy.equals(SearchType.ID.getKey())) {
-				return sessionFactory.getCurrentSession().createQuery("from Event e where e.action.farm.farmKey=:key and upper(e.animal.id) like :id")
+				return sessionFactory.getCurrentSession().createQuery("from Event e where e.action.farm.farmKey=:key and upper(e.animal.id) like :id order by e.eventDate desc")
 						.setParameter("key",farm.getKey())
 						.setParameter("id",searchValue.toUpperCase())
 							.list();
 			}
-			else return sessionFactory.getCurrentSession().createQuery("from Event e where e.action.farm.farmKey=:key")
+			else return sessionFactory.getCurrentSession().createQuery("from Event e where e.action.farm.farmKey=:key order by e.eventDate desc")
 					.setParameter("key",farm.getKey())
 						.list();
 		}
-		else return sessionFactory.getCurrentSession().createQuery("from Event e where e.action.farm.farmKey=:key")
+		else return sessionFactory.getCurrentSession().createQuery("from Event e where e.action.farm.farmKey=:key order by e.eventDate desc")
 			.setParameter("key",farm.getKey())
 				.list();
 	}
