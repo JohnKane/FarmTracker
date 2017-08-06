@@ -40,14 +40,20 @@ public class EventController {
 	
 	@RequestMapping(value = "/events")
     public ModelAndView listEvents(ModelAndView model,HttpServletRequest request){
-		Farm farm=((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm();
-		EventSearch search=(EventSearch)request.getSession().getAttribute(Util.EVENT_SEARCH);
+		int page=request.getParameter("page")!=null ? 
+				Integer.parseInt(request.getParameter("page")) : 
+				0;
 		
-        List<Event> events=(search==null || search.getSearchType()==null || search.getSearchType()==null) ? 
-        		eventService.getEvents(farm) : 
-        		eventService.getEvents(farm,search.getSearchType(),"%"+search.getSearchValue()+"%");
+		Farm farm=((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm();
+		EventSearch search=request.getSession().getAttribute(Util.EVENT_SEARCH)!=null ? 
+				(EventSearch)request.getSession().getAttribute(Util.EVENT_SEARCH) :
+				new EventSearch();
+		
+        List<Event> events=eventService.getEvents(farm,search.getSearchType(),"%"+search.getSearchValue()+"%",page);
+        search.setPage(page);
+        search.setCount(eventService.getCountEvents(farm,search.getSearchType(),"%"+search.getSearchValue()+"%"));
         model.addObject("events",events);
-        model.addObject("eventSearch",search!=null ? search : new EventSearch());
+        model.addObject("eventSearch",search);
         model.setViewName("events");
         return model;
     }

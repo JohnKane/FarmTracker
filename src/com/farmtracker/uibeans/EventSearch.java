@@ -1,6 +1,6 @@
 package com.farmtracker.uibeans;
 
-public class EventSearch{
+public class EventSearch extends SearchBean{
 	
 	public static enum SearchType{
 		ACTION(0,"Action"),

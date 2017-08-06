@@ -43,8 +43,12 @@ public class EventService {
 	}
 	
 	@Transactional
-	public List<Event> getEvents(Farm farm, Integer searchBy, String searchValue){
-		return eventDAO.getEvents(farm, searchBy, searchValue);
+	public List<Event> getEvents(Farm farm, Integer searchBy, String searchValue, Integer page){
+		return eventDAO.getEvents(farm, searchBy, searchValue, page);
+	}
+	
+	public Long getCountEvents(Farm farm, Integer searchBy, String searchValue) {
+		return eventDAO.getCountEvents(farm, searchBy, searchValue);
 	}
 	
 	public void setEventDAO(EventDAO eventDAO) {
