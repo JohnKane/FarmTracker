@@ -22,6 +22,7 @@ import com.farmtracker.service.ActionService;
 import com.farmtracker.service.AnimalService;
 import com.farmtracker.service.EventService;
 import com.farmtracker.uibeans.EventSearch;
+import com.farmtracker.uibeans.EventSearch.SearchType;
 import com.farmtracker.util.Util;
 
 @Controller
@@ -54,6 +55,7 @@ public class EventController {
         search.setCount(eventService.getCountEvents(farm,search.getSearchType(),"%"+search.getSearchValue()+"%"));
         model.addObject("events",events);
         model.addObject("eventSearch",search);
+        model.addObject("searchTypes",SearchType.values());
         model.setViewName("events");
         return model;
     }

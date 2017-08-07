@@ -15,9 +15,7 @@
 			        	<div class="input-group">
 		                	<form:select path="searchType" class="form-control">
 			                	<form:option value="">Search By</form:option>
-			                	<form:option value="0">Action</form:option>
-			                	<form:option value="1">Animal Name</form:option>
-			                	<form:option value="2">Animal Id</form:option>
+			                	<form:options items="${searchTypes}" itemValue="key" itemLabel="value"/>
 		                	</form:select>
 						</div>
 					</div>
