@@ -4,8 +4,8 @@ public class EventSearch extends SearchBean{
 	
 	public static enum SearchType{
 		ACTION(0,"Action"),
-		NAME(1,"Name"),
-		ID(2,"Id");
+		NAME(1,"Animal Name"),
+		ID(2,"Animal Id");
 		
 		private final int key;
 		private final String value;

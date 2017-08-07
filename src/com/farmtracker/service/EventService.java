@@ -47,6 +47,7 @@ public class EventService {
 		return eventDAO.getEvents(farm, searchBy, searchValue, page);
 	}
 	
+	@Transactional
 	public Long getCountEvents(Farm farm, Integer searchBy, String searchValue) {
 		return eventDAO.getCountEvents(farm, searchBy, searchValue);
 	}

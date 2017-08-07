@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.farmtracker.model.Animal;
@@ -20,6 +21,8 @@ import com.farmtracker.model.Farm;
 import com.farmtracker.model.User;
 import com.farmtracker.service.AnimalService;
 import com.farmtracker.service.AnimalTypeService;
+import com.farmtracker.uibeans.AnimalSearch;
+import com.farmtracker.uibeans.AnimalSearch.SearchType;
 import com.farmtracker.util.Util;
 
 @Controller
@@ -35,14 +38,38 @@ public class AnimalController {
 	
 	@RequestMapping(value = "/animals")
     public ModelAndView listAnimals(ModelAndView model,HttpServletRequest request) throws IOException {
-        List<Animal> animals=animalService.getAnimals(((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm());
+		Farm farm=((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm();
+		AnimalSearch search=request.getSession().getAttribute(Util.ANIMAL_SEARCH)!=null ? 
+				(AnimalSearch)request.getSession().getAttribute(Util.ANIMAL_SEARCH) :
+				new AnimalSearch();
+		int page=request.getParameter("page")!=null ? 
+				Integer.parseInt(request.getParameter("page")) : 
+				search.getPage();
+				
+		List<Animal> animals=animalService.getAnimals(farm,search.getSearchType(),"%"+search.getSearchValue()+"%",page);
+        search.setPage(page);
+        request.getSession().setAttribute(Util.ANIMAL_SEARCH,search);
+        search.setCount(animalService.getCountAnimals(farm,search.getSearchType(),"%"+search.getSearchValue()+"%"));
         model.addObject("animals",animals);
+        model.addObject("animalSearch",search);
+        model.addObject("searchTypes",SearchType.values());
         model.setViewName("animals");
         return model;
     }
 	
+	@RequestMapping(value = "/searchAnimals", method = RequestMethod.POST)
+    public ModelAndView animalSearch(@ModelAttribute AnimalSearch animalSearch,HttpServletRequest request,@RequestParam String action) {
+        if(action.equals("reset")) {
+        	request.getSession().removeAttribute(Util.ANIMAL_SEARCH);
+        }
+        else {
+        	request.getSession().setAttribute(Util.ANIMAL_SEARCH,animalSearch);
+        }
+        return new ModelAndView("redirect:/animals");
+    }
+	
 	@RequestMapping(value = "/newAnimal", method = RequestMethod.GET)
-    public ModelAndView newAnimalType(ModelAndView model,HttpServletRequest request) {
+    public ModelAndView newAnimal(ModelAndView model,HttpServletRequest request) {
         Animal animal=new Animal();
         model.addObject("animal",animal);
         model.addObject("animalTypes",getAnimalTypes(((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm()));

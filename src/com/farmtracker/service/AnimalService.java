@@ -47,6 +47,16 @@ public class AnimalService {
 		return animalDAO.getAnimals(keys);
 	}
 	
+	@Transactional
+	public List<Animal> getAnimals(Farm farm, Integer searchBy, String searchValue, Integer page){
+		return animalDAO.getAnimals(farm, searchBy, searchValue, page);
+	}
+	
+	@Transactional
+	public Long getCountAnimals(Farm farm, Integer searchBy, String searchValue) {
+		return animalDAO.getCountAnimals(farm, searchBy, searchValue);
+	}
+	
 	public void setAnimalDAO(AnimalDAO animalDAO) {
         this.animalDAO=animalDAO;
     }
