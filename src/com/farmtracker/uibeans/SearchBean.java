@@ -4,7 +4,7 @@ import com.farmtracker.util.Util;
 
 public abstract class SearchBean {
 	
-	private Integer page;
+	private Integer page=0;
 	private Long count;
 	
 	public Integer getPage() {return page;}
