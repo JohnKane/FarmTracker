@@ -31,7 +31,6 @@
 					</div>
 				</div>
 			</form:form>
-			<br />
 			<div style="float:right;">
 				<c:if test="${eventSearch.hasPreviousResults()}">
 	        		<a href="events?page=${eventSearch.page-1}" class="btn btn-default">&lt;&nbsp;Previous</a>
