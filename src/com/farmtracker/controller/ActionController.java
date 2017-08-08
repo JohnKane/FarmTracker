@@ -11,11 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.farmtracker.model.Action;
+import com.farmtracker.model.Farm;
 import com.farmtracker.model.User;
 import com.farmtracker.service.ActionService;
+import com.farmtracker.uibeans.ActionSearch;
 import com.farmtracker.util.Util;
 
 @Controller
@@ -28,10 +31,42 @@ public class ActionController {
 	
 	@RequestMapping(value = "/actions")
     public ModelAndView listActions(ModelAndView model,HttpServletRequest request) throws IOException {
-        List<Action> actions=actionService.getActions(((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm());
+		Farm farm=((User)request.getSession().getAttribute(Util.LOGGED_IN_USER)).getFarm();
+		ActionSearch search=request.getSession().getAttribute(Util.ACTION_SEARCH)!=null ? 
+				(ActionSearch)request.getSession().getAttribute(Util.ACTION_SEARCH) :
+				new ActionSearch();
+		int page=request.getParameter("page")!=null ? 
+				Integer.parseInt(request.getParameter("page")) : 
+				search.getPage();
+				
+		List<Action> actions=actionService.getActions(
+			farm,
+			search.getSearchValue()!=null ? "%"+search.getSearchValue()+"%" : null,
+			page
+		);
+        search.setPage(page);
+        search.setCount(
+        	actionService.getCountActions(
+	        	farm,
+	        	search.getSearchValue()!=null ? "%"+search.getSearchValue()+"%" : null
+        	)
+        );
+        request.getSession().setAttribute(Util.ACTION_SEARCH,search);
         model.addObject("actions",actions);
+        model.addObject("actionSearch",search);
         model.setViewName("actions");
         return model;
+    }
+	
+	@RequestMapping(value = "/searchActions", method = RequestMethod.POST)
+    public ModelAndView actionSearch(@ModelAttribute ActionSearch actionSearch,HttpServletRequest request,@RequestParam String action) {
+        if(action.equals("reset")) {
+        	request.getSession().removeAttribute(Util.ACTION_SEARCH);
+        }
+        else {
+        	request.getSession().setAttribute(Util.ACTION_SEARCH,actionSearch);
+        }
+        return new ModelAndView("redirect:/actions");
     }
 	
 	@RequestMapping(value = "/newAction", method = RequestMethod.GET)

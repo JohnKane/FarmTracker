@@ -32,14 +32,13 @@
 			</form:form>
 			<div style="float:right;">
 				<c:if test="${animalSearch.hasPreviousResults()}">
-	        		<a href="animals?page=${eventSearch.page-1}" class="btn btn-default">&lt;&nbsp;Previous</a>
+	        		<a href="animals?page=${animalSearch.page-1}" class="btn btn-default">&lt;&nbsp;Previous</a>
 	        	</c:if>
 	        	<c:if test="${animalSearch.hasNextResults()}">
-	        		<a href="animals?page=${eventSearch.page+1}" class="btn btn-default">Next&nbsp;&gt;</a>
+	        		<a href="animals?page=${animalSearch.page+1}" class="btn btn-default">Next&nbsp;&gt;</a>
 	        	</c:if>
 			</div>
 			<br /><br />
-			<br />
 	        <table class="table table-striped">
 	        	<th><a href="newAnimal" class="btn btn-info btn-xs" role="button">New Animal</a></th>
 	            <th>Animal Type</th>

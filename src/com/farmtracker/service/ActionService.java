@@ -42,6 +42,16 @@ public class ActionService {
 		return actionDAO.getActions(farm);
 	}
 	
+	@Transactional
+	public List<Action> getActions(Farm farm,String searchValue,Integer page){
+		return actionDAO.getActions(farm,searchValue,page);
+	}
+	
+	@Transactional
+	public Long getCountActions(Farm farm,String searchValue){
+		return actionDAO.getCountActions(farm,searchValue);
+	}
+	
 	public void setActionDAO(ActionDAO actionDAO) {
         this.actionDAO=actionDAO;
     }
