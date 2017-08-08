@@ -70,7 +70,16 @@ public class UserController {
         	);
         }
          
-        else userService.updateUser(user);
+        else{
+        	User existing=userService.getUser(user.getKey());
+        	existing.setEmail(user.getEmail());
+        		if(user.getPassword()!=null)
+        			existing.setPassword(user.getPassword());
+        	
+        	existing.setRole(user.getRole());
+        	existing.setFarm(user.getFarm());
+        	userService.updateUser(existing);
+        }
         
 
         return new ModelAndView("redirect:/users");
