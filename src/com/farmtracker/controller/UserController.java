@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.farmtracker.model.Farm;
 import com.farmtracker.model.Role;
 import com.farmtracker.model.User;
+import com.farmtracker.service.EmailService;
 import com.farmtracker.service.FarmService;
 import com.farmtracker.service.RoleService;
 import com.farmtracker.service.UserService;
@@ -34,6 +35,9 @@ public class UserController {
 	
 	@Autowired
 	private RoleService roleService;
+	
+	@Autowired
+	private EmailService emailService;
 	
 	@RequestMapping(value = "/users")
     public ModelAndView listUsers(ModelAndView model) throws IOException {
@@ -54,13 +58,20 @@ public class UserController {
     }
 	
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST)
-    public ModelAndView saveUser(@ModelAttribute User user) {
+    public ModelAndView saveUser(@ModelAttribute User user,HttpServletRequest request) {
         if(user.getKey() == null) {
         	user.setDateCreated(new Date());
         	userService.addUser(user);
+        	emailService.send(
+        		user.getEmail(),
+        		"noreply@farmerslittlehelper.com",
+        		"Welcome To Farmers Little Helper",
+        		"hello world"
+        	);
         }
          
         else userService.updateUser(user);
+        
 
         return new ModelAndView("redirect:/users");
     }
